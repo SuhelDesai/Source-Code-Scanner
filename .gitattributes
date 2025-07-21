@@ -1,0 +1,8 @@
+HOW_TO_RUN.txt filter=lfs diff=lfs merge=lfs -text
+MaxAuditXAnalyzer.jar filter=lfs diff=lfs merge=lfs -text
+README.txt filter=lfs diff=lfs merge=lfs -text
+Report filter=lfs diff=lfs merge=lfs -text
+Rules filter=lfs diff=lfs merge=lfs -text
+run.bat filter=lfs diff=lfs merge=lfs -text
+Source_Code filter=lfs diff=lfs merge=lfs -text
+core filter=lfs diff=lfs merge=lfs -text
