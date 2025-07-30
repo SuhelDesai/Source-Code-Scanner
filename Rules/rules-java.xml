@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="Security Ausddit Rules" version="1.0">
+
+      <rule id="COMMAND_INJECTION" severity="Critical" language="java">
+      <pattern><![CDATA[Runtime\.getRuntime\(\)\.exec\(.*\+.*\)]]></pattern>
+      <description><![CDATA[Possible Command Injection]]></description>
+    </rule>
+<rule id="LEFTDEBUG" severity="Critical" language="java">
+      <pattern><![CDATA[Runtime\\(\)\.main\(.*\+.*\)]]></pattern>
+      <description><![CDATA[Left Over Debugg Code]]></description>
+    </rule>
+    <rule id="HARDCODED_SECRET" severity="Critical" language="java">
+      <pattern><![CDATA[(?i)password\s*=\s*\".*\"|api[_-]?key\s*=\s*\".*\"]]></pattern>
+      <description><![CDATA[Hardcoded credential detected]]></description>
+    </rule>
+    <rule id="ARBITORY_FILE_ACCESS" severity="Critical" language="java">
+      <pattern><![CDATA[(?i) request.getParameter\s*=\s*\".*\"|api[_-]?file\s*=\s*\".*\"]]></pattern>
+      <description><![CDATA[File Access]]></description>
+    </rule>
+    <rule id="UNVALIDATED_REDIRECT" severity="Critical" language="java">
+      <pattern><![CDATA[(?i) request.getParameter\s*=\s*\".*\"|api[_-]?key\s*=\s*\".*\"]]></pattern>
+      <description><![CDATA[Do not use user-controlled URLs in redirects without validation or whitelisting]]></description>
+    </rule>
+    <rule id="REFLECTIONABUSE" severity="Critical" language="java">
+      <pattern><![CDATA[(?i) request.getParameter\s*=\s*\".*\"|api[_-]?key\s*=\s*\".*\"]]></pattern>
+      <description><![CDATA[Avoid using user-supplied input in reflection APIs.]]></description>
+    </rule>
+    <rule id="DESERIALIZATION_RISK" severity="Critical" language="java">
+      <pattern><![CDATA[(?i) rObjectInputStream"]]></pattern>
+      <description><![CDATA[Use JSON or safer formats. Validate streams and restrict classes if unavoidable]]></description>
+    </rule>
+    <rule id="DBCONLEAK" severity="Critical" language="java">
+      <pattern><![CDATA[(?i) jdbc"]]></pattern>
+      <description><![CDATA[]]></description>
+    </rule>
+    <rule id="UNENCRYPTED_NETWORK_COMMUNICATION" severity="Critical" language="java">
+      <pattern><![CDATA[(?i) http"]]></pattern>
+      <description><![CDATA[]]></description>
+    </rule>
+     <rule id="XMLENTITY_INJECTION" severity="Critical" language="java">
+      <pattern><![CDATA[(?i)password\s*=\s*\".*\"|api[_-]?key\s*=\s*\".*\"]]></pattern>
+      <description><![CDATA[Hardcoded credential detected]]></description>
+    </rule>
+
+
+    <rule id="IMPROPER_VALIDATION" severity="medium" language="java">
+      <pattern><![CDATA[request\.getParameter\(.*\)]]></pattern>
+      <description><![CDATA[Input should be validated/sanitized]]></description>
+    </rule>
+
+    <rule id="BROKEN_AUTH" severity="High" language="java">
+      <pattern><![CDATA[.*login.*]]></pattern>
+      <description><![CDATA[Check for broken authentication flows]]></description>
+    </rule>
+     <rule id="INSECURE_RANDOMNESS" severity="High" language="java">
+      <pattern><![CDATA[.*RANDOM.*]]></pattern>
+      <description><![CDATA[Check Insecure Random]]></description>
+    </rule>
+
+    <rule id="INSECURE_STORAGE" severity="Critical" language="java">
+      <pattern><![CDATA[MessageDigest\.getInstance\(.*(MD5|SHA1).*]]></pattern>
+      <description><![CDATA[Weak hash used for storing sensitive data]]></description>
+    </rule>
+
+    <rule id="UNRESTRICTED_UPLOAD" severity="High" language="java">
+      <pattern><![CDATA[.*MultipartFile.*transferTo\(.*\)]]></pattern>
+      <description><![CDATA[Check file upload restrictions]]></description>
+    </rule>
+
+    <rule id="PATH_TRAVERSAL" severity="Critical" language="java">
+      <pattern><![CDATA[.*new\s+File\(.*\+.*request\.getParameter\(.*\).*\).*]]></pattern>
+      <description><![CDATA[Possible Path Traversal vulnerability]]></description>
+    </rule>
+
+    <rule id="SSRF" severity="Critical" language="java">
+      <pattern><![CDATA[.*(URLConnection|HttpClient|URL)\s+.*=\s+new\s+.*\(.*request\.getParameter\(.*\).*\).*]]></pattern>
+      <description><![CDATA[Possible Server-Side Request Forgery (SSRF)]]></description>
+    </rule>
+
+    <rule id="RACE_CONDITION" severity="medium" language="java">
+      <pattern><![CDATA[.*synchronized\s*\(.*\)\s*\{.*\}
+]]></pattern>
+      <description><![CDATA[Possible Race Condition. Review synchronization.]]></description>
+    </rule>
+
+    <rule id="INSECURE_DESERIALIZATION" severity="High" language="java">
+      <pattern><![CDATA[ObjectInputStream\s+.*=\s+new\s+ObjectInputStream\(.*\);]]></pattern>
+      <description><![CDATA[Check input before deserialization]]></description>
+    </rule>
+
+    <rule id="INTEGER_OVERFLOW" severity="medium" language="java">
+      <pattern><![CDATA[.*\+\+|--|\+=|-=.*]]></pattern>
+      <description><![CDATA[Check for integer overflow/underflow conditions]]></description>
+    </rule>
+
+    <rule id="BUFFER_OVERFLOW" severity="High" language="java">
+      <pattern><![CDATA[char
+
+\[\]
+
+\s+\w+\s*=\s*new\s+char
+
+\[.*\]
+
+;]]></pattern>
+      <description><![CDATA[Check for buffer boundaries]]></description>
+    </rule>
+
+    <rule id="DOS_STRINGBUFFER" severity="medium" language="java">
+      <pattern><![CDATA[StringBuffer\s+\w+\s*=\s*new\s+StringBuffer\(\d{6,}\)]]></pattern>
+      <description><![CDATA[Possible DoS via large StringBuffer]]></description>
+    </rule>
+
+    <rule id="DOS_STRINGBUILDER" severity="medium" language="java">
+      <pattern><![CDATA[StringBuilder\s+\w+\s*=\s*new\s+StringBuilder\(\d{6,}\)]]></pattern>
+      <description><![CDATA[Possible DoS via large StringBuilder]]></description>
+    </rule>
+    <rule id="DOS_BUFFEREDREADER" severity="medium" language="java">
+      <pattern><![CDATA[BufferedReader\s+\w+\s*=\s*new\s+BufferedReader\(\d{6,}\)]]></pattern>
+      <description><![CDATA[Possible DoS via large BufferedReader]]></description>
+    </rule>
+
+    <rule id="CATCH_NULL_POINTER" severity="Low" language="java">
+      <pattern><![CDATA[catch\s*\(\s*NullPointerException\s*\)]]></pattern>
+      <description><![CDATA[Avoid catching NullPointerException]]></description>
+    </rule>
+
+    <rule id="VALUE_NOT_READ" severity="Low" language="java">
+      <pattern><![CDATA[\b\w+\s*=\s*.*;]]></pattern>
+      <description><![CDATA[Variable declared but never used]]></description>
+    </rule>
+
+    <rule id="UNUSED_METHOD" severity="Low" language="java">
+      <pattern><![CDATA[(private|protected)\s+[\w<>
+
+\[\]
+
+]+\s+\w+\s*\(.*\)\s*\{]]></pattern>
+      <description><![CDATA[Method may be unused]]></description>
+    </rule>
+
+    <rule id="OVERLY_BROAD_CATCH" severity="medium" language="java">
+      <pattern><![CDATA[catch\s*\(\s*Exception\s*\)]]></pattern>
+      <description><![CDATA[Overly broad catch block]]></description>
+    </rule>
+    <rule id="OVERLY_BROAD_THROW" severity="medium" language="java">
+      <pattern><![CDATA[throws\s*\(\s*Exception\s*\)]]></pattern>
+      <description><![CDATA[Overly broad catch block]]></description>
+    </rule>
+    <rule id="Empty_TryOrCatch_Block" severity="medium" language="java">
+      <pattern><![CDATA[catch\s*\(\s*Exception\s*\)]]></pattern>
+      <description><![CDATA[Overly broad catch block]]></description>
+    </rule>
+
+    <rule id="UNRELEASED_STREAM" severity="medium" language="java">
+      <pattern><![CDATA[InputStream\s+\w+\s*=\s*new\s+.*;]]></pattern>
+      <description><![CDATA[Stream resource must be closed]]></description>
+    </rule>
+
+    <rule id="UNRELEASED_DB" severity="medium" language="java">
+      <pattern><![CDATA[Connection\s+\w+\s*=\s*DriverManager\.getConnection\(.*\);]]></pattern>
+      <description><![CDATA[Database connection must be closed]]></description>
+    </rule>
+
+    <rule id="UNRELEASED_SOCKET" severity="medium" language="java">
+      <pattern><![CDATA[Socket\s+\w+\s*=\s*new\s+Socket\(.*\);]]></pattern>
+      <description><![CDATA[Socket should be closed properly]]></description>
+    </rule>
+
+    <rule id="MULTIPLE_LOGGER" severity="Low" language="java">
+      <pattern><![CDATA[Logger\s+\w+\s*=.*;]]></pattern>
+      <description><![CDATA[Avoid using multiple logger instances]]></description>
+    </rule>
+    <rule id="LOG_FORGING" severity="Low" language="java">
+      <pattern><![CDATA[Logger\s+\w+\s*=.*;]]></pattern>
+      <description><![CDATA[Avoid using multiple logger instances]]></description>
+    </rule>
+    <rule id="ACCESS_SPECIFIER" severity="Low" language="java">
+      <pattern><![CDATA[Logger\s+\w+\s*=.*;]]></pattern>
+      <description><![CDATA[Avoid using multiple logger instances]]></description>
+    </rule>
+     <rule id="MISSING_CHECK_NULL" severity="Low" language="java">
+      <pattern><![CDATA[Logger\s+\w+\s*=.*;]]></pattern>
+      <description><![CDATA[Avoid using multiple logger instances]]></description>
+    </rule>
+<rule id="REDUNDANT_NULLCHECK" severity="Low" language="java">
+      <pattern><![CDATA[Logger\s+\w+\s*=.*;]]></pattern>
+      <description><![CDATA[Avoid using multiple logger instances]]></description>
+    </rule>
+    <rule id="WEAK_SSL" severity="High" language="java">
+      <pattern><![CDATA[SSLContext\.getInstance\(.*(SSL|TLSv1|TLSv1\.1).*]]></pattern>
+      <description><![CDATA[Weak SSL/TLS protocol]]></description>
+    </rule>
+
+    <rule id="ERRORNEOUS_STRING_COMPARE" severity="medium" language="java">
+      <pattern><![CDATA[.*==.*"]]></pattern>
+      <description><![CDATA[Use .equals() for String comparison]]></description>
+    </rule>
+
+    <rule id="WEAK_HASH" severity="High" language="java">
+      <pattern><![CDATA[MessageDigest\.getInstance\(.*(MD5|SHA1).*]]></pattern>
+      <description><![CDATA[Use strong cryptographic hash]]></description>
+    </rule>
+
+    <rule id="PRIVACY_VIOLATION" severity="medium" language="java">
+      <pattern><![CDATA[System\.getProperty\(.*user.*\)]]></pattern>
+      <description><![CDATA[Avoid leaking user information]]></description>
+    </rule>
+
+    <rule id="PORTABILITY" severity="Low" language="java">
+      <pattern><![CDATA[\".*\\/.*\"]]></pattern>
+      <description><![CDATA[Use File.separator for cross-platform paths]]></description>
+    </rule>
+
+    <rule id="JVM_TERMINATION" severity="High" language="java">
+      <pattern><![CDATA[System\.exit\(.*\);]]></pattern>
+      <description><![CDATA[Avoid terminating JVM abruptly]]></description>
+    </rule>
+
+    <rule id="ARRAY_TOSTRING" severity="Low" language="java">
+      <pattern><![CDATA[.*\.toString\(\)]]></pattern>
+      <description><![CDATA[Avoid abrupt termination of the JVM using calls like System.exit() or Runtime.getRuntime().halt() unless explicitly required (e.g., command-line tools or shutdown hooks). Sudden exits bypass cleanup logic, resource release, and logging, leading to unpredictable states and poor error visibility. Use structured exception handling and application shutdown mechanisms to ensure graceful termination.]]></description>
+    </rule>
+<rule id="SYSTEM_INFORMATION_LEAK" severity="High" language="java">
+      <pattern><![CDATA[e\.printStackTrace\(\);]]></pattern>
+      <description><![CDATA[Internal info leak via stack trace]]></description>
+    </rule>
+    <rule id="SYSTEM_INFORMATION_LEAK_INTERNAL" severity="High" language="java">
+      <pattern><![CDATA[e\.printStackTrace\(\);]]></pattern>
+      <description><![CDATA[Internal info leak via stack trace]]></description>
+    </rule>
+<rule id="SQL_INJECTION" severity="High" language="java">
+      <pattern><![CDATA[e\.printStackTrace\(\);]]></pattern>
+      <description><![CDATA[Internal info leak via stack trace]]></description>
+    </rule>
+    <rule id="SYSTEM_INFORMATION_LEAK_EXTERNAL" severity="Critical" language="java">
+      <pattern><![CDATA[response\.getWriter\(\)\.write\(.*Exception.*\)]]></pattern>
+      <description><![CDATA[Do not send exception details to user]]></description>
+    </rule>
+<rule id="SYSOUT" severity="Critical" language="java">
+      <pattern><![CDATA[System.out.]]></pattern>
+      <description><![CDATA[Do not send exception details to user]]></description>
+    </rule>
+   
+</ruleset>

@@ -1,0 +1,5 @@
+Step1: Add Source Code files or unzip source code in Folder "Source_Code".
+Step2: Run the bat file run.bat.
+Step3: Check the Reports in "Report" Folder.
+
+Reports will be generated in Excel and HTML format.
